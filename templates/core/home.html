@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+{% block content %}
+	
+
+{% include 'includes/alert.html' %}
+
+{% if user.is_authenticated %}
+
+<section class="products section bg-gray">
+	<div class="container">
+		<div class="row">
+			<div class="title text-center">
+				<h2>FEEDS</h2>
+				<a href="{% url 'create_post' %}">Create Post</a>
+			</div>
+		</div>
+		<div class="row">
+			{% for post in posts %}
+			<div>
+				<img class="img-responsive" src="{{ post.owner.profile_image.url }}" alt="product-img" style="width: 3rem;" /><a href="{% url 'profile-feed' post.owner.id %}">{{ post.owner.username }}</a>
+			</div>
+			<div class="col">
+				<div class="product-item">
+					<div class="product-thumb">
+						<span class="bage">Sale</span>
+						<img class="img-responsive" src="{{ post.featured_image.url }}" alt="product-img" />
+						<div class="preview-meta">
+							<ul>
+								<li>
+									<span  data-toggle="modal" data-target="#product-modal">
+										<i class="tf-ion-ios-search-strong"></i>
+									</span>
+								</li>
+								<li>
+			                        <a href="#" ><i class="tf-ion-ios-heart"></i></a>
+								</li>
+								<li>
+									<a href=""><i class="tf-ion-android-cart"></i></a>
+								</li>
+							</ul>
+                      	</div>
+					</div>
+					<div class="product-content">
+						<h4><a href="product-single.html">{{post.title}}</a></h4>
+						<p class="price">$200</p>
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+</section>
+
+{% else %}
+
+<div class="hero-slider">
+	<div class="slider-item th-fullpage hero-area" style="background-image: url({% static 'images/slider/connect.jpeg' %});">
+	  <div class="container">
+		<div class="row">
+		  <div class="col-lg-8 text-left">
+			<p data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".1">REGISTER</p>
+			<h1 data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".5">Connect the world <br> with InstaPed.</h1>
+			<a data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".8" class="btn" href="">Click</a>
+		  </div>
+		</div>
+	  </div>
+	</div>
+</div>
+
+{% endif %}
+
+
+<!--
+Start Call To Action
+==================================== -->
+<section class="call-to-action bg-gray section">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 text-center">
+				<div class="title">
+					<h2>SUBSCRIBE TO NEWSLETTER</h2>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat, <br> facilis numquam impedit ut sequi. Minus facilis vitae excepturi sit laboriosam.</p>
+				</div>
+				<div class="col-lg-6 col-md-offset-3">
+				    <div class="input-group subscription-form">
+				      <input type="text" class="form-control" placeholder="Enter Your Email Address">
+				      <span class="input-group-btn">
+				        <button class="btn btn-main" type="button">Subscribe Now!</button>
+				      </span>
+				    </div><!-- /input-group -->
+			  </div><!-- /.col-lg-6 -->
+
+			</div>
+		</div> 		<!-- End row -->
+	</div>   	<!-- End container -->
+</section>   <!-- End section -->
+
+{% endblock %}

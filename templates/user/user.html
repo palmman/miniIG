@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<section class="page-header">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="content">
+					<h1 class="page-name">Dashboard</h1>
+					<ol class="breadcrumb">
+						<li><a href="{% url 'home' %}"></a>Home</a></li>
+						<li class="active">my account</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<section class="user-dashboard page-wrapper">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <ul class="list-inline dashboard-menu text-center">
+          <li><a class="active"  href="#">Profile Details</a></li>
+        </ul>
+        <div class="dashboard-wrapper dashboard-user-profile">
+          <div class="media">
+            <div class="pull-left text-center" href="#">
+              <img class="media-object user-img" src="{{userprofile.profile_image.url}}" alt="Image">
+              <a href="{% url 'edit_profile' %}" class="btn btn-transparent mt-20">Edit Profile</a>
+            </div>
+            <div class="media-body">
+              <ul class="user-profile-list">
+                <li><span>Full Name:</span>{{userprofile.name}}</li>
+                <li><span>Email:</span>{{userprofile.email}}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      {% for i in post %}
+      <div class="col-md-4">
+        <div class="product-item">
+					<div class="product-thumb">
+						<!-- <span class="bage">Sale</span> -->
+						<a href="{% url 'post' i.id %}"><img class="img-responsive" src="{{ i.featured_image.url }}" alt="product-img" /></a>
+						<!-- <div class="preview-meta">
+							<ul>
+								<li>
+									<span  data-toggle="modal" data-target="#product-modal">
+										<i class="tf-ion-ios-search-strong"></i>
+									</span>
+								</li>
+								<li>
+			                        <a href="#" ><i class="tf-ion-ios-heart"></i></a>
+								</li>
+								<li>
+									<a href=""><i class="tf-ion-android-cart"></i></a>
+								</li>
+							</ul>
+                      	</div> -->
+					</div>
+					<div class="product-content">
+						<h4><a href="{% url 'post' i.id %}">{{i.title}}</a></h4>
+						<p class="price">$200</p>
+					</div>
+				</div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  
+</section>
+
+{% endblock %}
